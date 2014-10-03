@@ -8,10 +8,10 @@ $(document).ready(function () {
 		$('.ryu-still').show();
 	})
 	.mousedown (function () {
-		//play hadouken
+		playHadouken();
 		$('.ryu-ready').hide();
 		$('.ryu-throwing').show();
-		$('.hadouken').show()
+		$('.hadouken').finish().show()
 		.animate(
 			{'left': '832px'},
 			500,
@@ -27,5 +27,24 @@ $(document).ready(function () {
 		//ryu goes back standing
 	});
 
-	
+
+	$(document).keydown(function (e) {
+		if (e.which === 88) {
+			$('.ryu-throwing').hide();
+			$('.ryu-ready').hide();
+			$('.ryu-still').hide();
+			$('.ryu-cool').show();
+		}
+	}).keyup(function (e) {
+		if (e.which === 88) {
+			$('.ryu-cool').hide();
+			$('.ryu-ready').show();
+		}
+	});
 });
+
+function playHadouken () {
+	$('#hadouken-sound')[0].volume = 0.5;
+	$('#hadouken-sound')[0].load();
+	$('#hadouken-sound')[0].play();
+}
